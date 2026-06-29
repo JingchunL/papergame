@@ -442,7 +442,7 @@ function renderRoundMenu() {
 function renderInputPapers() {
   const body = [
     '请输入纸条。',
-    '多个纸条请使用英文逗号分隔。',
+    '多个纸条请使用换行分隔。',
     '',
     '例如：',
     '',

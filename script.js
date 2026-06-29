@@ -491,7 +491,7 @@ function renderViewMyPapers() {
     ].join('\n');
   }
 
-  const controls = `<div class="button-row">${menuButton('按回车返回...', 'my-papers-back-round')}</div>`;
+  const controls = `<div class="button-row">${menuButton('返回', 'my-papers-back-round')}</div>`;
   return frame(body, controls);
 }
 
@@ -539,7 +539,7 @@ function renderDrawPrompt() {
     body = [
       '没有未抽取的纸条，自刎归天！'
     ].join('\n');
-    const controls = `<div class="button-row">${menuButton('按回车返回...', 'draw-back-round')}</div>`;
+    const controls = `<div class="button-row">${menuButton('返回', 'draw-back-round')}</div>`;
     return frame(body, controls);
   }
 
@@ -582,7 +582,7 @@ function renderDrawContent() {
 
   const controls = `
     <div class="button-row">
-      ${menuButton('按回车公布这东吴到底是姓孙还是姓周...', 'draw-show-authors')}
+      ${menuButton('公布这东吴到底是姓孙还是姓周...', 'draw-show-authors')}
     </div>
   `;
 
@@ -604,7 +604,7 @@ function renderDrawAuthors() {
     '=================='
   ].join('\n');
 
-  const controls = `<div class="button-row">${menuButton('接着奏乐，接着舞！（按回车返回菜单...）', 'draw-back-round-after-authors')}</div>`;
+  const controls = `<div class="button-row">${menuButton('接着奏乐，接着舞！（返回菜单）', 'draw-back-round-after-authors')}</div>`;
   return frame(body, controls);
 }
 
@@ -657,15 +657,13 @@ function renderRoundHistory() {
     '================================================================================'
   ].join('\n');
 
-  const controls = `<div class="button-row">${menuButton('按回车返回...', 'round-history-back-list')}</div>`;
+  const controls = `<div class="button-row">${menuButton('返回', 'round-history-back-list')}</div>`;
   return frame(body, controls);
 }
 
 function renderExitScreen() {
   const body = [
-    '那就容我天意爷告老还乡了。你走了，我们吃什么？',
-    '',
-    '按 Enter 键退出...'
+    '那就容我天意爷告老还乡了。你走了，我们吃什么？'
   ].join('\n');
   return frame(body);
 }
@@ -830,7 +828,10 @@ function submitPaperContent() {
     return;
   }
 
-  const contents = raw.split(',').map((value) => value.trim()).filter(Boolean);
+  const contents = raw
+    .split(/\r?\n/)
+    .map((value) => value.trim())
+    .filter(Boolean);
   if (!contents.length) {
     goToRoundMenu();
     return;

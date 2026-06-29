@@ -284,9 +284,9 @@ function menuButton(label, action, roundName = '') {
 
 function renderMainMenu() {
   const body = [
-    '========================',
+    '<hr>',
     APP_TITLE,
-    '========================',
+    '<hr>',
     '',
     '请选择：'
   ].join('\n');
@@ -305,11 +305,10 @@ function renderMainMenu() {
 
 function renderNewRoundPrompt() {
   const body = [
-    '========================',
+    '<hr>',
     '新建回合',
-    '========================',
-    '',
-    '请输入回合名称:'
+    '<hr>',
+    ''
   ].join('\n');
 
   const controls = `
@@ -330,9 +329,9 @@ function renderNewRoundPrompt() {
 
 function renderNewRoundConfirm() {
   const body = [
-    '========================',
+    '<hr>',
     '新建回合',
-    '========================',
+    '<hr>',
     '',
     '该回合已存在。',
     '',
@@ -351,11 +350,11 @@ function renderNewRoundConfirm() {
 
 function renderNicknamePrompt() {
   const body = [
-    '========================',
+    '<hr>',
     '输入昵称',
-    '========================',
+    '<hr>',
     '',
-    '说出汝名，吓吾一跳！请输入昵称：',
+    '说出汝名，吓吾一跳！',
     ''
   ].join('\n');
 
@@ -383,9 +382,9 @@ function renderContinueList() {
   }
 
   const body = [
-    '========================',
+    '<hr>',
     '继续已有回合',
-    '========================',
+    '<hr>',
     '',
     '已有回合：',
     ''
@@ -404,9 +403,10 @@ function renderHistoryList() {
   }
 
   const body = [
-    '========================',
+    '<hr>',
     '查看历史回合',
-    '========================',
+    '点击回合名称会泄底未抽选的纸条',
+    '<hr>',
     '',
     '历史回合：',
     ''
@@ -419,10 +419,10 @@ function renderHistoryList() {
 
 function renderRoundMenu() {
   const body = [
-    '================',
+    '<hr>',
     `当前玩家：${state.currentNickname}`,
     `当前回合：${state.currentRoundName}`,
-    '================',
+    '<hr>',
     ''].join('\n');
 
   const controls = `
@@ -441,8 +441,8 @@ function renderRoundMenu() {
 
 function renderInputPapers() {
   const body = [
-    '请输入纸条。',
-    '多个纸条请使用换行分隔。',
+    '请输入纸条',
+    '多个纸条请使用换行分隔',
     '',
     '例如：',
     '',
@@ -456,7 +456,7 @@ function renderInputPapers() {
   const controls = `
     <form class="form-row" data-form="papers">
       <label>
-        请输入纸条：
+        新纸条：
         <textarea name="paperContent" autocomplete="off"></textarea>
       </label>
       <div class="inline-row">
@@ -477,15 +477,16 @@ function renderViewMyPapers() {
     body = [
       '我读完一卷烧一卷，全部读完则全部烧尽，',
       '因此书房无书，徒有四壁。',
+      '',
       '你还没有输入纸条'
     ].join('\n');
   } else {
     const header = ['编号', '内容'].join('    ');
-    const rows = papers.map((paper) => [paper.id, paper.content].join('    '));
+    const rows = papers.map((paper) => [paper.id, paper.content].join('      '));
     body = [
-      '========================',
+      '<hr>',
       '你的纸条个个有情有义:',
-      '========================',
+      '<hr>',
       '',
       header,
       '-'.repeat(40),
@@ -508,19 +509,19 @@ function renderDeletePaper() {
   }
 
   const body = [
-    '========================',
+    '<hr>',
     '删除纸条',
-    '========================',
+    '<hr>',
     '',
     listText,
     '',
-    '请输入要删除的纸条编号：'
+    '<hr>'
   ].join('\n');
 
   const controls = `
     <form class="form-row" data-form="delete-paper">
       <label>
-        编号：
+        请输入要删除的纸条编号：
         <input name="paperId" type="number" inputmode="numeric" autocomplete="off" />
       </label>
       <div class="inline-row">
@@ -541,7 +542,7 @@ function renderDrawPrompt() {
     body = [
       '没有未抽取的纸条，自刎归天！'
     ].join('\n');
-    const controls = `<div class="button-row">${menuButton('返回', 'draw-back-round')}</div>`;
+    const controls = `<div class="button-row">${menuButton('点击自刎归天', 'draw-back-round')}</div>`;
     return frame(body, controls);
   }
 
@@ -572,13 +573,13 @@ function renderDrawContent() {
   const selected = state.pendingDrawResult ? state.pendingDrawResult.selected : [];
   const rows = selected.map((paper, index) => `${index + 1}. ${paper.content}`);
   const body = [
-    '==================',
+    '<hr>',
     '本轮抽取结果',
-    '==================',
+    '<hr>',
     '',
     ...(rows.length ? rows : ['（没有抽到任何纸条）']),
     '',
-    '=================='
+    '<hr>'
   ].join('\n');
 
   const controls = `
@@ -594,15 +595,15 @@ function renderDrawAuthors() {
   const selected = state.pendingDrawResult ? state.pendingDrawResult.selected : [];
   const rows = selected.map((paper, index) => `${index + 1}. ${paper.content} —— ${paper.nickname}`);
   const body = [
-    '==================',
+    '<hr>',
     '在下一者为主公悲伤，二者给主公道喜：',
-    '==================',
+    '<hr>',
     '',
     '本轮作者公布',
     '',
     ...(rows.length ? rows : ['（没有抽到任何纸条）']),
     '',
-    '=================='
+    '<hr>'
   ].join('\n');
 
   const controls = `<div class="button-row">${menuButton('接着奏乐，接着舞！（返回菜单）', 'draw-back-round-after-authors')}</div>`;
@@ -639,23 +640,23 @@ function renderRoundHistory() {
     : ['（暂无抽选历史）'];
 
   const body = [
-    '========================',
+    '<hr>',
     `回合: ${state.historyRoundName}`,
-    '========================',
+    '<hr>',
     `总纸条数: ${total}`,
     `已抽数量: ${drawn}`,
     `未抽数量: ${undrawn}`,
-    '='.repeat(30),
+    '<hr>',
     paperHeader,
-    '-'.repeat(80),
+    '<hr>',
     ...paperRows,
-    '='.repeat(30),
+    '<hr>',
     '抽选历史',
-    '-'.repeat(50),
+    '<hr>',
     historyHeader,
-    '-'.repeat(50),
+    '<hr>',
     ...drawHistoryRows,
-    '='.repeat(30),
+    '<hr>',
   ].join('\n');
 
   const controls = `<div class="button-row">${menuButton('返回', 'round-history-back-list')}</div>`;

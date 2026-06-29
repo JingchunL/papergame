@@ -450,8 +450,7 @@ function renderInputPapers() {
     '败兵必哀',
     '哀兵必胜',
     '胜兵必骄',
-    '',
-    '如需返回上级菜单直接输入回车即可。'
+    ''
   ].join('\n');
 
   const controls = `
@@ -551,7 +550,6 @@ function renderDrawPrompt() {
     '',
     '请输入抽取数量：',
     '',
-    '如需返回上级菜单直接输入回车即可。'
   ].join('\n');
 
   const controls = `
@@ -888,7 +886,7 @@ function submitDrawCount() {
 
   const drawCount = Number(raw);
   if (!Number.isInteger(drawCount) || drawCount < 1) {
-    state.notice = '请输入有效的数字，或直接回车返回上一级';
+    state.notice = '请输入有效的数字';
     render();
     return;
   }

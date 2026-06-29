@@ -1,3 +1,5 @@
+element.innerHTML = body;
+
 const STORAGE_KEY = 'paper_game_web_v1';
 const APP_TITLE = '抽小纸条小游戏';
 const DEFAULT_GAME = {
